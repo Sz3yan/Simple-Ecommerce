@@ -1,0 +1,77 @@
+/* NYP Y1S2 2021 - 2022 APP DEVELOPMENT PROJECT
+
+   Structure of adminDashboard.css
+   |
+   ├─ 1. global
+
+
+    /* --------------------------------------------------------------------------
+        1. global
+    -------------------------------------------------------------------------- */
+    .wrapp {
+        display: block;
+        margin: 0 auto;
+        max-width: 90%;
+    }
+
+    #admin_auction_title{
+        display: flex;
+        padding: 0% 2%;
+    }
+
+    hr{
+        margin: 0;
+    }
+
+    .product-grid__products {
+        padding: 0 18.99% 0 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .top-items__card {
+        margin-bottom: 11.3%;
+        padding: 0;
+        width: calc(50% - 1rem);
+    }
+
+    .top-items__card a {
+        display: block;
+        position: relative;
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .top-items__card-price p {
+        font-size: 12px;
+    }
+    
+    .value, .remarks {
+        font-size: 15px;
+    }
+
+    .thumbnail {
+        margin-bottom: 1em;
+    }
+
+    .top-items__card a img {
+        width: 70px
+    }
+
+    .cardd {
+        background-color: white;
+        border-radius: 20px;
+        padding: 15px;
+    }
+
+    .white {
+        color: white;
+    }
+
+    .pending {
+        color : #FF9900;
+    }
+
+    .accepted {
+        color : #16C35B;
+    }

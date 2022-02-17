@@ -1,0 +1,64 @@
+{% extends "adminBase.html" %}
+{% block title %}Tom Patterson - (Admin) Product Management{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../static/css/adminBase.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/adminProductsManagement.css">
+{% endblock %}
+
+{% block bodyContent %}
+    <div>
+        <b class="page-title">Product Management</b>
+        <a class="add-account" href="/adminProductCreation">Create a new product</a>
+    </div>
+<hr style="height: 2px;">
+<div class="container-fluid">
+{% for product in product_list %}
+    <div class="products">
+       {% if product.get_picture() %}
+            <img src="../../static/images/product_pics/{{ product.get_picture() }}" class="product-pic">
+            {% else %}
+            <img src="../../static/images/default-product-image.png" class="product-pic">
+            {% endif %}
+            <br>
+            <p>&nbsp ID: {{ product.get_product_id() }}</p>
+            <p>&nbsp Name: {{ product.get_name() }}</p>
+            <p>&nbsp Price: {{ product.get_price() }}</p>
+            <p>&nbsp Quantity: {{ product.get_quantity() }}</p>
+            <p>&nbsp Discount: {{ product.get_discount() }}</p>
+            <p>&nbsp Description: {{ product.get_description() }}</p>
+
+        <form action="{{url_for('delete_product', id=product.get_product_id())}}" method="POST">
+            <div class="delete-button">
+            <button type="button" class="btn btn-danger"><a href="/adminProductUpdate/{{product.get_product_id()}}/" class="edit-button" style="color: white; float: right;">Edit</a></button>
+        </div>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{product.get_product_id()}}">
+                       Delete
+                </button>
+                <div class="modal" id="myModal_{{product.get_product_id()}}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                          <div class="modal-header">
+                            <h4 class="modal-title">Delete Confirmation</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                          </div>
+
+
+                          <div class="modal-body">
+                            Are you sure you want to delete {{ product.get_name() }}?
+                          </div>
+
+                          <div class="modal-footer">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
+

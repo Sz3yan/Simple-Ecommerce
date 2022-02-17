@@ -1,0 +1,60 @@
+{% extends "adminBase.html" %}
+{% block title %}Tom Patterson - (Admin) Product Update{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../../static/css/adminBase.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/adminProductsManagement.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/adminProductUpdate.css">
+{% endblock %}
+
+{% block bodyContent %}
+{% from "includes/formHelper.html" import render_field %}
+<div>
+        <b class="page-title">Product Update</b>
+    </div>
+    <br>
+    <br>
+    <div class = "container-product">
+        {% if product.get_picture() %}
+      <img src="../../static/images/product_pics/{{ product.get_picture() }}" class="product-pic">
+      {% else %}
+      <img src="../../static/images/default-product-image.png" class="product-pic">
+      {% endif %}
+        <br>
+        <form method="POST" class="" action="" enctype="multipart/form-data">
+        <div class="form-product-field">
+        {{ render_field(form.product_pic, class="form-product-field") }}
+        </div>
+            <br>
+        <div class="form-product-field">
+                {{ render_field(form.name, class="form-product-field") }}
+        </div>
+            <br>
+        <div class="form-product-field">
+                {{ render_field(form.price, class="form-product-field") }}
+        </div>
+            <br>
+        <div class="form-product-field">
+                {{ render_field(form.quantity, class="form-product-field") }}
+        </div>
+            <br>
+        <div class="form-product-field">
+                {{ render_field(form.discount, class="form-product-field") }}
+        </div>
+            <br>
+        <div class="form-product-field">
+                {{ render_field(form.category, class="form-product-field") }}
+        </div>
+            <br>
+        <div class="form-product-field">
+            {{ render_field(form.description, class="form-product-field") }}
+        </div>
+            <div class="form-product-field">
+            {{ render_field(form.top, class="form-product-field") }}
+        </div>
+            <br>
+        <button class="cancel-product"><a href="/adminProductManagement" style="color:white;">Cancel</a></button>
+        <input type="submit" value="Update Product" class="submit-product">
+        </form>
+    </div>
+{% endblock %}

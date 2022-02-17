@@ -1,0 +1,60 @@
+.page-title{
+font-size: 200%;
+margin-left: 3%;
+}
+
+.add-account {
+    padding: 0.5% 1% 0.5% 1%;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 100%;
+    float: right;
+    margin-right:3%;
+}
+
+.tom-navv {
+    position: static;
+}
+
+.products{
+width:40%;
+display: inline-block;
+margin-left: 6%;
+border: 1px solid black;
+margin-bottom: 2%;
+}
+
+.product-pic{
+float: left;
+width:40%;
+height:90%;
+box-shadow: 0px 3px 5px -2px gray;
+margin: 1.5% 1.5% 1.5% 1.5%;
+}
+
+.delete-button{
+width:8%;
+color: white:
+float: right;
+display: inline-block;
+}
+
+.prod_id{
+text-align: left;
+margin-left: 3.5%;
+}
+
+.prod-info{
+margin-left: 5%;
+}
+
+.btn btn-danger{
+display: inline-block;
+float: right;
+}
+
+p{
+font-size: 130%;
+}

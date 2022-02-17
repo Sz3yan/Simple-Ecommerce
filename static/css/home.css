@@ -1,0 +1,173 @@
+/* NYP Y1S2 2021 - 2022 APP DEVELOPMENT PROJECT
+
+   Structure of home.css
+   |
+   ├─ 1. header
+   ├─ 2. top-links
+   ├─ 3. top-items
+   ├─ 4. creator-showcase
+     
+    /* --------------------------------------------------------------------------
+        1. header
+    -------------------------------------------------------------------------- */
+    
+    .header {
+        position: relative;
+        display: block!important;
+        width: 100%;
+    }
+
+    .header-overlay {
+        padding: 0;
+        width: 37.5%;
+        max-width: 43.75rem;
+        top: 40%;
+        left: 50.4%;
+        transform: translateY(-50%);
+    }
+
+    .header-overlay {
+        position: absolute;
+    }
+
+    .header-subtitle {
+        margin: 1.5rem auto 0;
+        max-width: 15rem;
+    }
+
+
+    /* --------------------------------------------------------------------------
+        2. top-links
+    -------------------------------------------------------------------------- */
+    .top-links-messaging__message {
+        max-width: 25rem;
+    }
+
+    .top-links__message {
+        display: flex;
+        justify-content: center;
+        margin: min(13.5rem,10.8%) 0 min(14rem,11.2%);
+        padding-bottom: 0;
+    }
+
+    .top-links-messaging h2 {
+        font-size: 1.5rem;
+        line-height: 1.5;
+        letter-spacing: 0.01em;
+        text-align: center;
+    }
+
+    .bold {
+        color: #dedad2;
+    }
+    
+    .top-links {
+        margin-bottom: 14rem;
+    }
+
+    .top-links__link {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    /* --------------------------------------------------------------------------
+        3. top-items
+    -------------------------------------------------------------------------- */
+    .top-items__inner {
+        margin: min(14%,17.5rem) auto;
+        padding: 0 min(8%,10rem) 0 0;
+        overflow: visible;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        max-width: 125rem;
+    }
+
+    .top-items-banner {
+        width: 45.48%;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        .banner-container {
+            padding-bottom: min(calc(100vh - 4rem),143.33%);
+            position: sticky;
+            top: 4rem;
+        }
+    }
+
+    .banner-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    @supports ((-o-object-fit:cover) or (object-fit:cover)) {
+        .banner-image {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .top4 {
+        width: 47%;
+        margin-bottom: 3.2%;
+    }
+
+    .top4header {
+        text-align: center;
+        margin: 18% 0 14.2%;
+    }
+
+    .product-grid__products {
+        margin-top: 2.75rem;
+        padding: 0 18.99% 0 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .top-items__card {
+        margin-bottom: 11.3%;
+        padding: 0;
+        width: calc(50% - 1rem);
+    }
+
+    .top-items__card a {
+        display: block;
+        position: relative;
+        width: 100%;
+    }
+
+    .thumbnail {
+        margin-bottom: 1em;
+    }
+
+    .top-items__card a img {
+        width: 250px
+    }
+
+    /* --------------------------------------------------------------------------
+        4. creator-showcase
+    -------------------------------------------------------------------------- */
+    .c-creator-showcase {
+        margin: 5rem 0 7.5rem;
+        overflow:hidden
+    }
+
+    .creator-showcase__inner {
+        max-width: 125rem;
+        margin: 0 auto;
+        overflow:visible
+    }
+
+    .creator-showcase__header {
+        padding:0 min(4%, 5rem)
+    }
+
+    .creator-showcase__title {
+        margin-bottom:1rem
+    }
+
+    .creator-showcase__description {
+        max-width:17.5rem
+    }

@@ -1,0 +1,128 @@
+/* NYP Y1S2 2021 - 2022 APP DEVELOPMENT PROJECT
+
+   Structure of mainshop.css
+   |
+   ├─ 1. header (left div)
+   ├─ 2. product img (left div)
+   ├─ 3. product info (right div)
+   ├─ 4. sze yans pro bottom thing
+
+    /* --------------------------------------------------------------------------
+        1. header
+    -------------------------------------------------------------------------- */
+
+    .shopHeader {
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+
+    .whitespace {
+            height: 20vh;
+        }
+
+    /* --------------------------------------------------------------------------
+        2. product img (left div)
+    -------------------------------------------------------------------------- */
+
+    .product-img {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .img-title {
+        font-size: 1.3em;
+        margin-bottom: 0px;
+        padding-top: 1em;
+        padding-left: 3px;
+    }
+
+    .img-subtitle {
+        font-size: 1em;
+        color: #52504e;
+        padding-left: 3px;
+    }
+
+    /* --------------------------------------------------------------------------
+        3. product info (right div)
+    -------------------------------------------------------------------------- */
+
+    .product-title {
+        font-size: 2em;
+        margin: 0;
+        padding: 0;
+    }
+
+    .product-subtitle {
+        font-size: 1.35em;
+        color: #52504e;
+        margin: 0;
+        padding: 0;
+    }
+
+    .bid-table {
+        width: 90%;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        border: 0.1em solid;
+        border-collapse: separate;
+        border-color: #d6d5d2;
+        border-radius: 8px;
+    }
+
+    #bidLine {
+        border-bottom: 0.1em solid;
+        border-collapse: separate;
+        border-color: #d6d5d2;
+        padding-bottom: 0;
+    }
+
+    .bid-table td {
+        padding: 10px;
+    }
+
+    .product-text {
+        color: #545251;
+    }
+
+    .bidAmt {
+        font-size: 1.4em;
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+    }
+
+    .bid-table p {
+        margin: 0;
+    }
+
+    .accordion {
+        width: 90%;
+    }
+
+    .accordion-button {
+        background-color: #FBFAF5;
+        border: 0.08em solid;
+        border-color: #d6d5d2;
+        border-radius: 8px;
+    }
+
+    .accordion-body {
+        background-color: #FBFAF5;
+    }
+
+    .offer-table {
+        width: 85%;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+
+    }
+
+    .offer-table td {
+        padding: 3px;
+        text-align: center;
+    }
+

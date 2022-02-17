@@ -1,0 +1,103 @@
+/* NYP Y1S2 2021 - 2022 APP DEVELOPMENT PROJECT
+
+   Structure of mainshop.css
+   |
+   ├─ 1. product img (left div)
+   ├─ 2. product info (right div)
+   ├─ 3. creator-showcase
+
+    /* --------------------------------------------------------------------------
+        1. body
+    -------------------------------------------------------------------------- */
+
+    .shopHeader {
+        width: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .whitespace {
+        height: 20vh;
+    }
+
+/* --------------------------------------------------------------------------
+        2. product img (left div)
+    -------------------------------------------------------------------------- */
+
+    .product-img {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .img-title {
+        font-size: 1.3em;
+        margin-bottom: 0px;
+        padding-top: 1em;
+        padding-left: 3px;
+    }
+
+    .img-subtitle {
+        font-size: 1em;
+        color: #50504D;
+        padding-left: 3px;
+    }
+
+    #reference {
+        font-size: 0.8em;
+        color: #595956;
+    }
+
+/* --------------------------------------------------------------------------
+        3. product info (right div)
+    -------------------------------------------------------------------------- */
+
+    .product-info {
+        width: 90%;
+    }
+
+    .add-button {
+        padding: 1% 2% 1% 2%;
+        background-color: black;
+        border: none;
+        color: white;
+        border-radius: 8px;
+    }
+
+    .product-help {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        border: 0.1em solid;
+        border-collapse: separate;
+        border-color: #d6d5d2;
+        border-radius: 8px;
+    }
+
+    .faq-table td a {
+        padding: 2em;
+    }
+
+    .faq-table td i {
+        padding-left: 1.8em;
+    }
+
+    .faq-table td {
+        padding-bottom: 0.5em;
+        padding-top: 0.5em;
+    }
+
+    .faq-table .td-top {
+        padding-top: 1.2em;
+    }
+
+    .faq-table .td-bot {
+        padding-bottom: 1.2em;
+    }
+
+    #cart-btn {
+    background-color: transparent;
+    padding: 1em 4.3em;
+    margin: 1em 0;
+    border-radius: 30px;
+    }

@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Tom Patterson - Home{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/home.css">
+{% endblock %}
+
+{% block bodyContent %}
+    <div class="header">
+        <div class="tom-banner">
+            <div class="tom-banner-media-container">
+                <video class="tom-banner-media" autoplay loop preload width="100%">
+                    <source src="../static/images/hi.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="header-overlay">
+                <h1>Tom Art</h1>
+                <p class="header-subtitle">Introducing a considered curation of limited edition fine art NFTs with real-world impact.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-links container">
+        <div class="top-links__message"> 
+            <section class="top-links-messaging">
+                <h2 class="top-links-messaging__message">We exist to empower <span class="bold">creators and make a lasting</span> positive impact.</h2>
+            </section>
+        </div>
+    
+        <div class="container">
+            <div class="top-links__link"> 
+                <a class="p-2" href="/auction"><img src="../static/images/Auction.jpg" width="362" height="465"/></a>
+                <a class="p-2" href="#cs"><img src="../static/images/Freelance Design.jpg" width="362" height="465"/></a>
+                <a class="p-2" href="/mainshop"><img src="../static/images/bags.jpg" width="362" height="465"/></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-items">
+        <div class="top-items__inner">
+            <div class="top-items-banner">
+                <div class="banner-container">
+                        <img class="banner-image" src="../static/images/unsplash_umfpFoKxIVg.jpg"/>
+                </div>
+            </div>
+            <div class="top4">
+                <header class="top4header">
+                    <h2 class="top4title">Your creative journey starts here</h2>
+                    <p class="top4subtitle">Discover Tom Patterson designed tools made by and for creators.</p>
+                </header>
+                <div class="product-grid__products p-5">
+                    {% for top in top4 %}
+                    {% if top4[top].get_top() == 1 %}
+                        <div class="top-items__card">
+                            <a class="thumbnail" href="/mainshop"><img src="../../static/images/product_pics/{{ top4[top].get_picture() }}"/></a>
+                            <div class="top-items__card-detail">
+                                <a href=""> {{ top4[top].get_name() }} </a>
+                                <div class="top-items__card-price">
+                                    <p><span>${{ top4[top].get_price() }}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-section__creator-showcase" id="cs">
+        <section class="c-creator-showcase">
+            <div class="creator-showcase__inner">
+                <header class="creator-showcase__header">
+                    <h2 class="creator-showcase__title">Creator showcase</h2>
+                    <p class="creator-showcase__description">See our favourite photos #ShotOnUrth.</p>
+                </header>
+
+                <section class="pt-5 pb-5">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-6">
+                                <h3 class="mb-3"></h3>
+                            </div>
+                            <div class="col-6 text-right">
+                                <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                                    <i class="fa fa-arrow-left"></i>
+                                </a>
+                                <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </div>
+                            <div class="col-12">
+                                <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="">
+                                                        <img class="img-fluid" src="static/images/unsplash_B63UmuDkznY.jpg" width="483">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="">
+                                                        <img class="img-fluid" src="static/images/unsplash_sR1BaDlRSKM.jpg" width="483">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="">
+                                                        <img class="img-fluid" src="static/images/unsplash_SUOLacDyBBg.jpg" width="483">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-item">
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="">
+                                                        <img class="img-fluid" src="static/images/unsplash_t0Bv0OBQuTg.jpg" width="483">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="">
+                                                        <img class="img-fluid" src="static/images/unsplash_tloFnD-7EpI.jpg" width="483">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="">
+                                                        <img class="img-fluid" src="static/images/unsplash_tq8Cuap8_wY.jpg" width="483">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+{% endblock %}

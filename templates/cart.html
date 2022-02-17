@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Tom Patterson - Cart (Empty){% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/cart.css">
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block bodyContent %}
+    <style>
+        .tom-navv {
+            background-image: url(none);
+        }
+    </style>
+
+    <div>
+        <div class="container">
+            <div class="d-flex justify-content-center cart-title"><h2>Your Cart</h2></div>
+            <div class="c-cart-template__products is-visible">
+                {% for products in cartList %}
+                {% if (products | length) > 0 %}
+                    <div class="c-cart-products">
+                        <div class="c-cart-product">
+                            <div class="c-cart-product__image-col">
+                                <a href="" class="c-cart-product__image-container"><img width="160" alt="Black" class="c-cart-product__image ls-is-cached lazyloaded" src="../../static/images/product_pics/{{ products[0].get_picture() }}"></a>
+                                <button class="c-cart-product__remove is-mobile o-btn is-underline">Remove</button>
+                            </div>
+                            <div class="c-cart-product__details">
+                                <div class="c-cart-product__details-inner">
+                                    <div class="c-cart-product__title-container">
+                                        <p class="c-cart-product__title o-title">{{ products[0].get_name() }}</p>
+                                        <p class="c-cart-product__options"><span>{{ products[0].get_description() }}</span></p>
+                                    </div>
+
+
+                                    <div class="o-quantity-selector c-cart-product__quantity">
+                                        <div class="o-quantity-selector__inner">
+                                            <div class="o-quantity-selector__input d-flex">
+                                                <form method="POST" action="/updateSubCart/{{ loop.index - 1 }}" class="d-flex">
+                                                    <button type=submit class="btn btn-warning">-</button>
+                                                </form>
+                                                <form method="POST" action="/updateAddCart/{{ loop.index - 1 }}" class="d-flex">
+                                                    <input readonly type="number" class="o-input o-quantity-selector__input-field" value="{{ products | length }}">
+                                                    <button type=submit class="btn btn-warning">+</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="c-cart-product__price-container"><span class="c-cart-product__price">Price:{{ products[0].get_price() }}<span>$</span></span><span class="c-cart-product__price">Total:{{ (products | length) * products[0].get_price() }}<span>$</span></span></p>
+                                </div>
+                                <form action="/deleteCart/{{ loop.index - 1 }}" method="POST">
+                                    <button class="c-cart-product__remove is-desktop o-btn is-underline">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <p class="c-cart-template__empty ">Your cart is currently empty.</p>
+            <p class="c-cart-template__subtotal o-heading is-size-4">
+                <span>Subtotal:</span>
+                <span>${{ subtotal }}</span>
+                <a class="btn btn-outline-primary" href="/mainshop" role="button">Return to Shop</a>
+                <a class="btn btn-outline-primary" href="/checkout" role="button">Checkout</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

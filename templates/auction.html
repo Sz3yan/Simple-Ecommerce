@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Tom Patterson - Auction{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/auction.css">
+{% endblock %}
+
+{% block bodyContent %}
+{% from "includes/formHelper.html" import render_field %}
+    <div class="navEmpty"></div>
+    <div class="shopHeader">
+        <div class="toptext">
+            <h5>AUCTION</h5>
+            <p>Support the Tom Patterson community and our exclusive designers. Bid for original, never-seen-before designs by yours truly.</p>
+        </div>
+    </div>
+    <div class="navEmpty"></div>
+    <div class="product-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="product-img">
+                        <img src="../static/images/1-urth-arkose-20l-backpack-grey_1000x@2x.jpg" alt="Norite 24L Modular Bag">
+                        <h4 class="img-title">{{ ongoing.get_name() }}</h4>
+                        <p class="img-subtitle">{{ ongoing.get_description() }}</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="product-info">
+                            <h3 class="product-title">{{ ongoing.get_name() }}</h3>
+                            <p class="product-subtitle">{{ ongoing.get_description() }}</p>
+                            <table class="bid-table">
+                                <tr>
+                                    <td id="bidLine"><p class="product-text">Sale ends at {{ ongoing.get_end_date() }}</p></td>
+                                </tr>
+                                <tr>
+                                    <td class="product-text">Minimum Bid:
+                                        <p class="bidAmt">{{ ongoing.get_minimum_amount() }}</p><br>
+                                    <p>Highest Bid:</p>
+                                    <p class="bidAmt">{{ highest_bid }}</p>
+                                    <a class="btn btn-primary" href="/auctionForm" role="button">Make a bid</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                    <div class="accordion" id="offer-table">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#offer" aria-expanded="true" aria-controls="collapseOne">
+                            Offers
+                            </button>
+                            </h2>
+                            <div id="offer" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#offer-table">
+                            <div class="accordion-body">
+                                <form>
+                                    <table class="offer-table text-center">
+                                        <tr><th>Price</th><th>Expiration</th><th>From</th><th>Delete</th><th>Update</th></tr>
+                                        {% for user in bid_list %}
+                                        <tr>
+                                            <td class="product-text">${{ user.get_bidAmount() }}</td>
+                                            <td class="product-text">{{ expire_date }} days</td>
+                                            <td class="product-text">{{ user.get_bidUser() }}
+                                            </td>
+                                            <td>
+                                            <form action="{{url_for('delete_bid', id=user.get_bidId())}}" method="POST">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                            </td>
+                                            <td>
+                                            <a href="/updateBid/{{ user.get_bidId() }}" class="btn btn-warning">Update</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="whitespace"></div>
+
+{% endblock %}

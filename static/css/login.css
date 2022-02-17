@@ -1,0 +1,90 @@
+.tom-navv {
+    position: static;
+}
+
+
+.container-login{
+margin-left: 10%;
+margin-right: 10%;
+margin-bottom: 10%;
+text-align: center;
+}
+
+.form-login-field{
+background-color: transparent;
+border: none;
+width: 50%;
+border-radius: 1px;
+margin: auto;
+}
+
+input[type=email] {
+    border-bottom: 1px solid #000000;
+}
+
+input[type=password] {
+    border-bottom: 1px solid #000000;
+}
+
+input[type=date] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+input[type=text] {
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+
+.form-login {
+    text-align: center;
+}
+
+.forget-pw{
+text-align: right;
+font-size: 70%;
+font-weight: bold;
+}
+
+.submit-login {
+    padding: 1% 2% 1% 2%;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: 8px;
+}
+
+a.submit-login {
+color: white;
+}
+
+.register-link{
+font-size:60%;
+}
+
+.register-link-click{
+color:blue;
+}
+
+.profile-pic{
+border-radius: 50%;
+border: 1px solid black;
+height: 15%;
+width: 15%;
+}
+
+.forgot-link-click{
+color:black;
+font-weight: bold;
+}
+
+.form-login-field-file{
+background-color: transparent;
+border: none;
+width: 50%;
+border-radius: 1px;
+margin: 0 auto;
+
+}
+

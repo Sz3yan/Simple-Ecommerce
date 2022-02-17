@@ -1,0 +1,320 @@
+{% extends "adminBase.html" %}
+{% block title %}Tom Patterson - (Admin){% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../static/css/adminBase.css">
+    <link rel="stylesheet" type="text/css" href="static/css/adminDashboard.css"/>
+{% endblock %}
+
+{% block bodyContent %}
+    <div class="d-flex justify-content-between" id="admin_auction_title">
+          <h1>Sales</h1>
+    </div><hr/>
+
+    <div class="wrapp">
+        <div class="adminDashboard">
+            <div class="p-1">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="">
+                              <div class="row g-0">
+                                    <div class="col-6">
+                                        <div class="p-1">
+                                            <div class="cardd white" style="background: linear-gradient(to right, rgba(243,144,52,1) , rgba(255,39,39,1));">
+                                                <h3 class="title">Product Sales</h3>
+                                                <p class="value">${{ subtotal }}</p>
+                                                <p class="remarks">As of {{ date }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="p-1">
+                                            <div class="cardd white" style="background: linear-gradient(to right, rgba(0,210,84,1), rgba(0,179,235,1));">
+                                                <h3 class="title">Trees Planted</h3>
+                                                <p class="value">{{ "%.0f" | format(subtotal / 5) }}</p>
+                                                <p class="remarks">Quantity</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="p-1">
+                                            <div class="cardd">
+                                                <h3 class="title">Auction</h3>
+                                                <p class="value">{{ auction_on }}</p>
+                                                <p class="remarks">On Going</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="p-1">
+                                            <div class="cardd">
+                                                <!--  need get from auction    -->
+                                                <h3 class="title">Auction Sales</h3>
+                                                <p class="value">$0</p>
+                                                <p class="remarks">As of {{ date }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <canvas id="myChart" class="cardd"></canvas>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <script>
+                            var ctx = document.getElementById("myChart");
+                            var myLineChart = new Chart(ctx, {
+                              type: 'line',
+                              data: {
+                                labels: {{ labels | tojson }},
+                                datasets: [{
+                                  label: "Earnings from Product Sales",
+                                  lineTension: 0.3,
+                                  backgroundColor: "rgba(78, 115, 223, 0.05)",
+                                  borderColor: "rgba(78, 115, 223, 1)",
+                                  pointRadius: 3,
+                                  pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                                  pointBorderColor: "rgba(78, 115, 223, 1)",
+                                  pointHoverRadius: 3,
+                                  pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                                  pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                                  pointHitRadius: 10,
+                                  pointBorderWidth: 2,
+                                  data: {{ values }},
+                                }],
+                              },
+                              options: {
+                                maintainAspectRatio: false,
+                                layout: {
+                                  padding: {
+                                    left: 10,
+                                    right: 25,
+                                    top: 25,
+                                    bottom: 0
+                                  }
+                                },
+                                scales: {
+                                  xAxes: [{
+                                    time: {
+                                      unit: 'date'
+                                    },
+                                    gridLines: {
+                                      display: false,
+                                      drawBorder: false
+                                    },
+                                    ticks: {
+                                      maxTicksLimit: 7
+                                    }
+                                  }],
+                                  yAxes: [{
+                                    ticks: {
+                                      maxTicksLimit: 5,
+                                      padding: 10,
+                                      // Include a dollar sign in the ticks
+                                      callback: function(value, index, values) {
+                                        return '$' + number_format(value);
+                                      }
+                                    },
+                                    gridLines: {
+                                      color: "rgb(234, 236, 244)",
+                                      zeroLineColor: "rgb(234, 236, 244)",
+                                      drawBorder: false,
+                                      borderDash: [2],
+                                      zeroLineBorderDash: [2]
+                                    }
+                                  }],
+                                },
+                                legend: {
+                                  display: false
+                                },
+                                tooltips: {
+                                  backgroundColor: "rgb(255,255,255)",
+                                  bodyFontColor: "#858796",
+                                  titleMarginBottom: 10,
+                                  titleFontColor: '#6e707e',
+                                  titleFontSize: 14,
+                                  borderColor: '#dddfeb',
+                                  borderWidth: 1,
+                                  xPadding: 15,
+                                  yPadding: 15,
+                                  displayColors: false,
+                                  intersect: false,
+                                  mode: 'index',
+                                  caretPadding: 10,
+                                  callbacks: {
+                                    label: function(tooltipItem, chart) {
+                                      var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                      return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+                                    }
+                                  }
+                                }
+                              }
+                            });
+
+                            // render the chart
+                            const myChart = new Chart(
+                                document.getElementById('myChart'),
+                                config
+                            );
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-1">
+                  <div class="row">
+                        <div class="col-lg-6 col-md-12" style="min-height: 30.640625em;">
+                            <div class="p-1">
+                                <div class="cardd">
+                                    <h3 class="title">Sales Orders</h3>
+                                    <nav class="navbar navbar-light bg-light">
+                                        <form class="form-inline">
+                                              <input id="myInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                        </form>
+                                    </nav>
+                                    <script>
+                                        $(document).ready(function(){
+                                              $("#myInput").on("keyup", function() {
+                                                    var value = $(this).val().toLowerCase();
+                                                    $("#myTable tr").filter(function() {
+                                                      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                    });
+                                              });
+                                        });
+                                    </script>
+                                    <table class="table table-hover" id="dtBasicExample">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Order ID</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">Payment status</th>
+                                                <th scope="col">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myTable">
+                                            {% for sales in salesList %}
+                                            <tr data-toggle="modal" data-target="#exampleModalCenter{{ loop.index }}">
+                                                <th scope="row">{{ loop.index }}</th>
+                                                <td>{{ sales.get_firstname() }}</td>
+
+                                                {% if sales.get_order_status() == "pending" %}
+                                                    <td class="pending"> {{ sales.get_order_status() }} </td>
+                                                {% else %}
+                                                    <td class="accepted"> {{ sales.get_order_status() }} </td>
+                                                {% endif %}
+
+                                                <td>
+                                                    ${{ customer_totalList[loop.index - 1] }}
+                                                </td>
+                                            </tr>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalCenter{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Customer : {{ sales.get_firstname() }}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body d-flex justify-content-center">
+                                                            <div class="container-fluid">
+                                                                {% for i in sales.get_cart() %}
+                                                                {% for y in sales.get_cart()[i] %}
+                                                                        <div class="p-1">
+                                                                            <div class="product-grid__products">
+                                                                                <div class="product-grid__products p-2">
+                                                                                    <div class="top-items__card">
+                                                                                        <div class="top-items__card-detail">
+                                                                                            {% for top in top4 %}
+                                                                                                {% if sales.get_cart()[i][y].get_name() == top4[top].get_name() %}
+                                                                                                    <a class="thumbnail" href="/adminProductUpdate/{{top4[top].get_product_id()}}/"><img src="../../static/images/product_pics/{{ top4[top].get_picture() }}"/></a>
+                                                                                                    <p>{{ sales.get_cart()[i][y].get_name() }}</p>
+                                                                                                    <div class="top-items__card-price">
+                                                                                                        <p><span>${{ sales.get_cart()[i][y].get_price() }}</span></p>
+                                                                                                    </div>
+                                                                                                {% endif %}
+                                                                                            {% endfor %}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                {% endfor %}
+                                                            {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="p-1">
+                                <div class="cardd">
+                                    <h3 class="title">Top Orders</h3>
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <td><p class="value">Received orders</p></td>
+                                            <td><p class="remarks">{{ orders_quantity }}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><p class="value">Total Cost</p></td>
+                                            <td><p class="remarks">${{ subtotal }}</p></td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                              <tr>
+                                                  <th scope="col">Above $500</th>
+                                                  <th scope="col">Total</th>
+                                              </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for sales in salesList %}
+                                            {% if customer_totalList[loop.index - 1] > 500 %}
+                                            <tr>
+                                                <td><p class="value">Order Id {{ loop.index }}</p></td>
+                                                <td><p class="remarks">${{ customer_totalList[loop.index - 1] }}</p></td>
+                                            </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="p-1">
+                                <div class="cardd product-grid__products">
+                                    <h3 class="title">Top Selling Products</h3>
+                                    <div class="product-grid__products justify-content-center p-2">
+                                        {% for top in top4 %}
+                                        {% if top4[top].get_top() == 1 %}
+                                                <div class="top-items__card">
+                                                    <a class="thumbnail" href="/adminProductUpdate/{{top4[top].get_product_id()}}/"><img src="../../static/images/product_pics/{{ top4[top].get_picture() }}"/></a>
+                                                    <div class="top-items__card-detail">
+                                                        <a href="/adminProductUpdate/{{top4[top].get_product_id()}}/"> {{ top4[top].get_name() }} </a>
+                                                        <div class="top-items__card-price">
+                                                            <p><span>${{ top4[top].get_price() }}</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends "adminBase.html" %}
+{% block title %}Tom Patterson - (Admin) Orders{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../static/css/adminBase.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/adminOrder.css">
+{% endblock %}
+
+{% block bodyContent %}
+    <div id="admin_order_title">
+        <h1>Orders</h1>
+        <div class="search_bar">
+            <form>
+                <input id="searchbar" type="search" placeholder="Search by Order Id" aria-label="Search">
+                <button type="submit" id="search_btn">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="orders_container">
+        <div class="top_container">
+            {% if ("adminOrders_sorting" not in session) or (session["adminOrders_sorting"] == "")%}
+            <a href="/adminOrders/all">
+                <button class="sorted_btn_active">
+                    All (
+                    <span>
+                        {% if sales_dict_keys == [] %}
+                        0
+                        {% elif sales_dict_keys[(sales_dict_keys|length)-1] == "" %}
+                        {{ (sales_dict_keys|length)-1 }}
+                        {% else %}
+                        {{ (sales_dict_keys|length) }}
+                        {% endif %}
+                    </span>
+                    )
+                </button>
+            </a>
+            <a href="/adminOrders/pending">
+                <button class="sorted_btn">
+                    Pending
+                </button>
+            </a>
+            <button class="sorted_btn">Accepted</button>
+            <button class="sorted_btn">Shipping</button>
+            {% elif ("adminOrders_sorting" in session) and (session["adminOrders_sorting"] == "pending") %}
+            <a href="/adminOrders/all">
+                <button class="sorted_btn">
+                    All (
+                    <span>
+                        {% if sales_dict_keys == [] %}
+                        0
+                        {% elif sales_dict_keys[(sales_dict_keys|length)-1] == "" %}
+                        {{ (sales_dict_keys|length)-1 }}
+                        {% else %}
+                        {{ (sales_dict_keys|length) }}
+                        {% endif %}
+                    </span>
+                    )
+                </button>
+            </a>
+            <a href="/adminOrders/pending">
+                <button class="sorted_btn_active">
+                    Pending
+                </button>
+            </a>
+            <button class="sorted_btn">Accepted</button>
+            <button class="sorted_btn">Shipping</button>
+            {% endif %}
+        </div>
+        <hr>
+
+        <div class="bottom_container">
+            {% if sales_dict == {} %}
+            <div class="row">
+                <div class="col-md">
+                    <p id="empty_order_txt">There is no orders for now</p>
+                </div>
+            </div>
+            {% else %}
+            {% for noOfRows in range(0, (keys_list|length)//2) %}
+            <div class="row">
+                {% for noOfCol in range(0, 2) %}
+                {% if keys_list[noOfRows+noOfRows+noOfCol] == "" %}
+                <div class="col-md-6"></div>
+                {% else %}
+                <div class="col-md-6">
+                    <div class="user_order">
+                        <div class="user_order_top">
+                            <div class="user_order_username">
+                                <p><b>Username:</b> {{ sales_dict[keys_list[noOfRows+noOfRows+noOfCol]].get_firstname()+ " " +sales_dict[sales_dict_keys[noOfRows+noOfRows+noOfCol]].get_lastname()}}</p>
+                            </div>
+                            <div class="user_order_orderId">
+                                <!--[:8] + "..."-->
+                                <p><b>Order ID:</b> <span>{{ keys_list[noOfRows+noOfRows+noOfCol] }}</span></p>
+                            </div>
+                        </div>
+                        <div class="user_order_center">
+
+                            <div class="user_order_details">
+                                <!--<img class="user_order_img" src="../static/images/blackBag2.png" alt="Product Image">-->
+                                <img class="user_order_img" src="../static/images/product_pics/{{ (values_list[noOfRows+noOfRows+noOfCol][0].values()|list)[0].get_picture() }}" alt="Product Image">
+
+                                <p class="user_order_product_name">
+                                    {{ (values_list[noOfRows+noOfRows+noOfCol][0].values()|list)[0].get_name() }}
+                                </p>
+
+                                <p class="user_order_quantity">
+                                    x{{ ((values_list[noOfRows+noOfRows+noOfCol][0].values()|list) | length) }}
+                                </p>
+
+                            </div>
+
+                            <div class="user_order_status">
+                                {% if sales_dict[keys_list[noOfRows+noOfRows+noOfCol]].get_order_status() == "pending"%}
+                                <span>Pending...</span>
+                                {% elif sales_dict[keys_list[noOfRows+noOfRows+noOfCol]].get_order_status() == "accepted" %}
+                                <span style="color:green;">Accepted</span>
+                                {% else %}
+                                <span>None</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="user_order_bottom">
+                            <div class="user_order_bottom_btn">
+                                <a href="/accept_order/{{ sales_dict_keys[noOfRows+noOfRows+noOfCol] }}"><button class="accept_btn" style="color:green;">Accept Order</button></a>
+                            </div>
+
+                            <div class="user_order_bottom_btn">
+                                <a href="#">
+                                    <button class="view_btn">
+                                        View more (
+                                        <span>
+                                            {{ (values_list[noOfRows+noOfRows+noOfCol] | length) }}
+                                        </span>)
+                                    </button>
+                                </a>
+
+                            </div>
+                            <div class="user_order_bottom_btn">
+                                <button type="button" class="cancel_btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                  Cancel Order
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Cancel Order</h5>
+                                                <button type="button" class="modal_cross" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">
+                                                        <svg class="cross_svg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             viewBox="0 0 100 100" style="enable-background:new 0 0 94.926 94.926;"
+                                                             xml:space="preserve">
+                                                            <g>
+                                                                <path d="M55.931,47.463L94.306,9.09c0.826-0.827,0.826-2.167,0-2.994L88.833,0.62C88.436,0.224,87.896,0,87.335,0
+                                                                    c-0.562,0-1.101,0.224-1.498,0.62L47.463,38.994L9.089,0.62c-0.795-0.795-2.202-0.794-2.995,0L0.622,6.096
+                                                                    c-0.827,0.827-0.827,2.167,0,2.994l38.374,38.373L0.622,85.836c-0.827,0.827-0.827,2.167,0,2.994l5.473,5.476
+                                                                    c0.397,0.396,0.936,0.62,1.498,0.62s1.1-0.224,1.497-0.62l38.374-38.374l38.374,38.374c0.397,0.396,0.937,0.62,1.498,0.62
+                                                                    s1.101-0.224,1.498-0.62l5.473-5.476c0.826-0.827,0.826-2.167,0-2.994L55.931,47.463z"/>
+                                                            </g>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to cancel this order?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-danger">Yes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
